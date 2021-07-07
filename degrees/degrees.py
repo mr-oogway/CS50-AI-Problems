@@ -92,8 +92,49 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    # TODO
+    # Keep track of no of states explored
+    num_explored = 0
     
+    # Initialise frontier to the just starting position 
+    start = Node(state=source, parent=None, action=None)
+    frontier = QueueFrontier() # Using the BFS which uses Queue firt in first out
+    frontier.add(start)
+
+    # Initialise an empty explored set to contain all the states explored
+    explored = set()
+
+    # Keep looping until we find a solution
+    while True:
+        # If nothing is there in frontier then there's no path
+        if frontier.empty():
+            return None
+        
+        # Choose a node from the frontier
+        node = frontier.remove()
+        num_explored += 1
+
+        # Mark node as explored
+        explored.add(node.state)
+
+        for action, state in neighbors_for_person(node.state):
+            if not frontier.contains_state(state) and state not in explored:
+                child = Node(state=state, parent=node, action=action)
+
+                # if child is the goal then we have a solution
+                if child.state == target:
+                    actions = []
+                    cells = []
+                    while child.parent is not None:
+                        actions.append(child.action)
+                        cells.append(child.state)
+                        child = child.parent
+                    actions.reverse()
+                    cells.reverse()
+                    return list(zip(actions, cells))
+                
+                # if not add child to node frontier
+                frontier.add(child)
+
     raise NotImplementedError
 
 
