@@ -141,7 +141,7 @@ class Maze():
             # Choose a node from the frontier
             node = frontier.remove()
             self.num_explored += 1
- 
+
             # If node is the goal, then we have a solution
             if node.state == self.goal:
                 actions = []
