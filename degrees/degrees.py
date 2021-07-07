@@ -94,7 +94,6 @@ def shortest_path(source, target):
 
     # Keep track of no of states explored
     num_explored = 0
-    
     # Initialise frontier to the just starting position 
     start = Node(state=source, parent=None, action=None)
     frontier = QueueFrontier() # Using the BFS which uses Queue firt in first out
@@ -112,7 +111,6 @@ def shortest_path(source, target):
         # Choose a node from the frontier
         node = frontier.remove()
         num_explored += 1
-
         # Mark node as explored
         explored.add(node.state)
 
@@ -134,8 +132,6 @@ def shortest_path(source, target):
                 
                 # if not add child to node frontier
                 frontier.add(child)
-
-    raise NotImplementedError
 
 
 def person_id_for_name(name):
